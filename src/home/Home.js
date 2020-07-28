@@ -3,6 +3,7 @@ import './Home.css';
 import Product from '../product/Product';
 
 const Home = () => {
+    console.log("Home component");
     return (
         <div className="home">       
             <img className="home__image"
@@ -60,4 +61,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default React.memo(Home);

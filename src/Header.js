@@ -6,7 +6,7 @@ import {useStateValue} from './redux/StateProvider';
 
 const Header = () => {
     const [{basket},dispatch]=useStateValue();
-
+    console.log("Header component");
 
     return (
        <nav className="header">
@@ -36,7 +36,7 @@ const Header = () => {
                         <span className="header__optionLine2">Prime</span>
                     </div>          
                </Link>
-               <Link to="/" className="header__link">
+               <Link to="/checkout" className="header__link">
                     <div className="header__optionBasket">
                         <ShoppingBasket/>
                         <span className="header__optionLine2 header__basketCount">{basket?.length}</span>
@@ -49,4 +49,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default React.memo(Header);
