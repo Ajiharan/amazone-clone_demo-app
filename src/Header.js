@@ -1,8 +1,13 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './Header.css';
 import {Link} from 'react-router-dom';
-import {Search,ShoppingBasket}from '@material-ui/icons';
+import {Search,ShoppingBasket, FaceRounded}from '@material-ui/icons';
+import {useStateValue} from './redux/StateProvider'; 
+
 const Header = () => {
+    const [{basket},dispatch]=useStateValue();
+
+
     return (
        <nav className="header">
            <Link to="/">
@@ -34,7 +39,7 @@ const Header = () => {
                <Link to="/" className="header__link">
                     <div className="header__optionBasket">
                         <ShoppingBasket/>
-                        <span className="header__optionLine2 header__basketCount">0</span>
+                        <span className="header__optionLine2 header__basketCount">{basket?.length}</span>
                     </div>
                </Link>
                
