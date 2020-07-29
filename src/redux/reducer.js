@@ -1,7 +1,14 @@
+import Cookie from 'js-cookie';
+
+const basketItems=Cookie.getJSON("CartItems") || [];
 export const initialState={
-    basket:[],
+    basket:basketItems,
     user:{}
 };
+
+export const getBasketTotal=(basket)=>{
+    return basket?.reduce((acc,i)=>acc+i.price,0);
+}
 
 export const reducer=(state=initialState,action)=>{
     console.log("state",state);

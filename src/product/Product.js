@@ -1,9 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './Product.css';
+import Cookie from 'js-cookie';
 import {useStateValue} from '../redux/StateProvider';
 const Product = ({id,title,price,image,rating}) => {
 
     const[{basket},dispatch]=useStateValue();
+
+    useEffect(()=>{
+        console.log("current",basket);
+        Cookie.set("CartItems",JSON.stringify(basket));
+    },[basket])
 
     const addToCart=({id,title,price,image,rating})=>{
         dispatch({
@@ -37,4 +43,4 @@ const Product = ({id,title,price,image,rating}) => {
     );
 };
 
-export default Product;
+export default React.memo(Product);
