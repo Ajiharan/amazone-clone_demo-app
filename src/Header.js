@@ -3,11 +3,17 @@ import './Header.css';
 import {Link} from 'react-router-dom';
 import {Search,ShoppingBasket, FaceRounded}from '@material-ui/icons';
 import {useStateValue} from './redux/StateProvider'; 
+import { auth } from './firebase/Firebase';
 
 const Header = () => {
-    const [{basket},dispatch]=useStateValue();
+    const [{basket,user},dispatch]=useStateValue();
     console.log("Header component");
 
+    const login=()=>{
+        if(user){
+            auth.signOut();
+        }
+    }
     return (
        <nav className="header">
            <Link to="/">
@@ -18,10 +24,10 @@ const Header = () => {
                 <Search className="header_searchIcon"/>
            </div>
            <div className="header__nav">
-               <Link to="/login" className="header__link">
-                    <div className="header__option">
-                        <span className="header__optionLine1">Hello Amazon</span>
-                        <span className="header__optionLine2">Sign In</span>
+               <Link to={!user && "/login"} className="header__link">
+                    <div onClick={login} className="header__option">
+                        <span className="header__optionLine1">Hello {user?.email}</span>
+                        <span className="header__optionLine2">{user?'Sign Out':'Sign In'}</span>
                     </div>          
                </Link>
                <Link to="/" className="header__link">

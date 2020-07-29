@@ -35,6 +35,7 @@
 }
 
 .product > button{
+    cursor: pointer;
     background-color: rgba(241, 175, 52, 0.925);
     border:1px solid;
     padding: 5px;

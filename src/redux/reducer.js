@@ -13,6 +13,12 @@ export const getBasketTotal=(basket)=>{
 export const reducer=(state=initialState,action)=>{
     console.log("state",state);
     switch(action.type){
+
+        case 'SET_USER':
+            return{
+                ...state,
+                user:action.user
+            }
         case 'ADD_TO_BASKET':
             const product=state.basket.find(e=>e.id===action.item.id);
             if(product){

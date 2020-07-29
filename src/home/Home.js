@@ -19,7 +19,7 @@ const Home = () => {
                 <Product
                     id="2"
                     title="WD 2TB Elements Portable External Hard Drive - USB 3.0 - WDBU6Y0020BBK"
-                    price={130}
+                    price={530}
                     rating={4}
                     image="https://images-na.ssl-images-amazon.com/images/I/51I3UjD-Q1L._AC_US160_.jpg"
                 />
@@ -28,14 +28,14 @@ const Home = () => {
                 <Product
                     id="3"
                     title="HP 63 | Ink Cartridge | Black | F6U62AN"
-                    price={180}
+                    price={480}
                     rating={3}
                     image="https://images-na.ssl-images-amazon.com/images/I/41xdIrw9Z9L._AC_US160_.jpg"
                 />
                 <Product
                     id="4"
                     title="AMD Ryzen 7 3700X 8-Core, 16-Thread Unlocked Desktop Processor with Wraith Prism LED Cooler"
-                    price={110}
+                    price={310.55}
                     rating={5}
                     image="https://images-na.ssl-images-amazon.com/images/I/41m+krxXiBL._AC_US160_.jpg"
                 />
