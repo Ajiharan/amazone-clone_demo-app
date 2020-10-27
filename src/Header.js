@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Search, ShoppingBasket, FaceRounded } from "@material-ui/icons";
 import { useStateValue } from "./redux/StateProvider";
 import { auth } from "./firebase/Firebase";
 
 const Header = () => {
   const [{ basket, user }, dispatch] = useStateValue();
-  console.log("Header component");
+  // console.log("Header component");
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log("history", history.location.pathname);
+  });
 
   const login = () => {
+    console.log("history", history.location.pathname);
     if (user) {
       auth.signOut();
     }
@@ -28,7 +34,10 @@ const Header = () => {
         <Search className="header_searchIcon" />
       </div>
       <div className="header__nav">
-        <Link to={!user && "/login"} className="header__link">
+        <Link
+          to={!user ? "/login" : `${history.location.pathname}`}
+          className="header__link"
+        >
           <div onClick={login} className="header__option">
             <span className="header__optionLine1">Hello {user?.email}</span>
             <span className="header__optionLine2">

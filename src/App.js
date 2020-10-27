@@ -7,10 +7,15 @@ import CheckOut from "./checkout/CheckOut";
 import Login from "./user/Login";
 import { useStateValue } from "./redux/StateProvider";
 import { auth } from "./firebase/Firebase";
-
+import PageNotFound from "./pageNotFound/PageNotFound";
+import Payment from "./payment/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 function App() {
   const [{ user }, dispatch] = useStateValue();
-
+  const stripePromise = loadStripe(
+    "pk_test_51HfqyyJ0jZ1ztGKc11B76bCMUdcaK690bAzPOLL0Qgt4UQ0hPoGJtxKYCQ72uwMQoD26c9slzDTmBISm9iezBf7J000sjAbuju"
+  );
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       console.log("AuthUser", authUser);
@@ -45,6 +50,16 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route exact path="/payment">
+            <Header />
+            <Elements stripe={stripePromise}>
+              <Payment />
+            </Elements>
+          </Route>
+          <Route exat>
+            <Header />
+            <PageNotFound />
           </Route>
         </Switch>
       </div>
