@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const stripe = require("stripe")(
-  "pk_test_51HfqyyJ0jZ1ztGKc11B76bCMUdcaK690bAzPOLL0Qgt4UQ0hPoGJtxKYCQ72uwMQoD26c9slzDTmBISm9iezBf7J000sjAbuju"
+  "sk_test_51HfqyyJ0jZ1ztGKcYgSgatUwP47Wt8Tn8zjgQzeKfQjoxxXEsmKoEg4uCQ6oMAGvbQ28voNjfjoE2hChYLvzu8Q800lTGBgM2b"
 );
 
 const app = express();
@@ -14,6 +14,18 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.status(200).send("Hi Express.js");
+});
+
+app.post("/payments/create", async (req, res) => {
+  console.log("Query", req.query);
+  const total = req.query.total;
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: total,
+    currency: "usd",
+  });
+  res.status(201).send({
+    clientSecret: paymentIntent.client_secret,
+  });
 });
 
 exports.api = functions.https.onRequest(app);

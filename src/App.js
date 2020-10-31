@@ -11,6 +11,7 @@ import PageNotFound from "./pageNotFound/PageNotFound";
 import Payment from "./payment/Payment";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Orders from "./orders/Orders";
 function App() {
   const [{ user }, dispatch] = useStateValue();
   const stripePromise = loadStripe(
@@ -50,6 +51,10 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/orders">
+            <Header />
+            <Orders />
           </Route>
           <Route exact path="/payment">
             <Header />

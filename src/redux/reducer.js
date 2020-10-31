@@ -40,6 +40,10 @@ export const reducer = (state = initialState, action) => {
       Cookie.set("CartItems", JSON.stringify(currentState));
       return { ...state, basket: [...currentState] };
 
+    case "EMPTY_BASKET":
+      Cookie.set("CartItems", []);
+      return { ...state, basket: [] };
+
     default:
       return state;
   }

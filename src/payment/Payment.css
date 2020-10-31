@@ -30,3 +30,15 @@
 .payment__details {
   flex: 0.7;
 }
+
+.payment__submitButton {
+  cursor: pointer;
+  background-color: rgba(241, 175, 52, 0.925);
+  border: 1px solid;
+  padding: 5px;
+  color: black;
+  margin-top: 10px;
+  border-color: #a88734 #9c7e31 #846a29;
+  margin-bottom: 10px;
+  width: 100%;
+}

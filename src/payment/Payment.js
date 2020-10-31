@@ -6,6 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { getBasketTotal } from "../redux/reducer";
 import CurrencyFormat from "react-currency-format";
 import axios from "../axios";
+import { db } from "../firebase/Firebase";
 import {
   CardElement,
   Elements,
@@ -36,6 +37,7 @@ const Payment = () => {
     };
     getClientSecret();
   }, [basket]);
+  console.log("clientSecret", clientSecret);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,9 +50,31 @@ const Payment = () => {
         },
       })
       .then(({ paymentIntent }) => {
+        console.log("paymentIntent", paymentIntent);
         setSuceeded(true);
         setError(null);
         setProecssing(false);
+
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          })
+          .then((res) => {
+            dispatch({
+              type: "EMPTY_BASKET",
+            });
+          })
+          .catch((err) => {
+            dispatch({
+              type: "EMPTY_BASKET",
+            });
+            console.log("err", err);
+          });
         history.replace("/orders");
       });
   };
@@ -117,6 +141,7 @@ const Payment = () => {
                 />
               </div>
               <button
+                className="payment__submitButton"
                 type="submit"
                 disabled={disable || processing || succeeded}
               >
